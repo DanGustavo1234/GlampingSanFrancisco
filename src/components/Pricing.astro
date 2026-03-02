@@ -1,0 +1,53 @@
+---
+const plans = [
+{
+  name: "Reserva tu Experiencia",
+  price: "Desde $50",
+  features: [
+    "Cocina equipada",
+    "Sala y comedor",
+    "Cama Queen",
+    "Baño completo privado",
+    "Jacuzzi privado",
+    "Vista a las montañas",
+    "Sofá cama",
+    "Capacidad hasta 4 personas"
+  ]
+}
+];
+---
+<section id="precios" class="py-24 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-neutral-900 mb-4">Tu Escapada Perfecta</h2>
+    </div>
+
+    <div class="flex justify-center">
+      {plans.map(plan => (
+        <div class="relative bg-white rounded-3xl p-10 border border-neutral-200 shadow-xl hover:shadow-2xl transition-shadow max-w-xl w-full">
+          
+          <h3 class="text-2xl font-bold text-neutral-900 text-center mb-4">{plan.name}</h3>
+          <div class="text-center mb-8">
+            <span class="text-5xl font-extrabold text-neutral-600">{plan.price}</span>
+            <span class="text-neutral-500">/noche</span>
+          </div>
+          
+          <ul class="space-y-4 mb-8">
+            {plan.features.map(feature => (
+              <li class="flex items-center text-neutral-700">
+                <svg class="h-5 w-5 text-neutral-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          
+          <a href="#contacto" class="block w-full text-center py-3 rounded-full font-semibold transition-all hover:scale-105 bg-neutral-600 text-white hover:bg-neutral-700">
+            Consultar disponibilidad
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

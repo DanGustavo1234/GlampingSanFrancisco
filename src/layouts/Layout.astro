@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Glamping moderno y natural. Reserva tu experiencia." />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-neutral-50 text-neutral-900 font-sans antialiased overflow-x-hidden">
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/* Tailwind utilities should be imported in Astro if it uses standard Tailwind setup. 
+	   Astro's integration injects them automatically but we can define custom variables here. */
+	:root {
+		--color-neutral: #52525b;
+		--color-neutral-dark: #27272a;
+		--color-neutral-light: #f4f4f5;
+	}
+	
+	html {
+		scroll-behavior: smooth;
+	}
+</style>

@@ -1,0 +1,37 @@
+---
+const images = [
+  "/img/glamping11.jpg",
+  "/img/glamping3.jpg",
+  "/img/glamping4.jpg",
+  "/img/glamping5.jpg",
+  "/img/glamping6.jpg",
+  "/img/glamping7.jpg",
+];
+---
+
+<section id="galeria" class="py-24 bg-neutral-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center md:text-left mb-16">
+      <h2 class="text-4xl font-bold text-neutral-900 mb-4">Galería</h2>
+      <p class="text-neutral-700 max-w-2xl text-lg">
+        Descubre la magia de cada rincón de nuestro glamping. Un espacio
+        diseñado para brindarte el mayor confort rodeado de naturaleza.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        images.map((img, index) => (
+          <div class="overflow-hidden rounded-2xl group cursor-pointer aspect-square shadow-md">
+            <img
+              src={img}
+              alt={`Glamping image ${index + 1}`}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

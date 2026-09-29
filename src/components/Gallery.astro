@@ -1,37 +1,198 @@
 ---
+import Icon from './ui/Icon.astro';
+
 const images = [
-  "/img/glamping11.jpg",
-  "/img/glamping3.jpg",
-  "/img/glamping4.jpg",
-  "/img/glamping5.jpg",
-  "/img/glamping6.jpg",
-  "/img/glamping7.jpg",
+  { src: '/img/g3.png', alt: 'Vista exterior del glamping entre la naturaleza' },
+  { src: '/img/g5.png', alt: 'Interior acogedor del alojamiento' },
+  { src: '/img/g6.png', alt: 'Espacio de descanso con vista natural' },
+  { src: '/img/portada.png', alt: 'Panorámica del Glamping San Francisco' },
+  { src: '/img/g8.png', alt: 'Detalle del entorno y paisaje' },
+  { src: '/img/g9.png', alt: 'Rincón del glamping al atardecer' },
+  { src: '/img/g10.png', alt: 'Área de convivencia al aire libre' },
+  { src: '/img/g11.png', alt: 'Experiencia de confort en la naturaleza' },
 ];
 ---
 
-<section id="galeria" class="py-24 bg-neutral-100">
+<section id="galeria" class="py-16 sm:py-20 lg:py-24 bg-neutral-100 scroll-mt-20 dark:bg-neutral-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center md:text-left mb-16">
-      <h2 class="text-4xl font-bold text-neutral-900 mb-4">Galería</h2>
-      <p class="text-neutral-700 max-w-2xl text-lg">
-        Descubre la magia de cada rincón de nuestro glamping. Un espacio
-        diseñado para brindarte el mayor confort rodeado de naturaleza.
+    <div class="text-center sm:text-left mb-10 sm:mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4 dark:text-neutral-50">Galería</h2>
+      <p class="text-neutral-700 max-w-2xl text-base sm:text-lg mx-auto sm:mx-0 dark:text-neutral-300">
+        Descubre la magia de cada rincón de nuestro glamping. Un espacio diseñado para brindarte el
+        mayor confort rodeado de naturaleza.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {
-        images.map((img, index) => (
-          <div class="overflow-hidden rounded-2xl group cursor-pointer aspect-square shadow-md">
-            <img
-              src={img}
-              alt={`Glamping image ${index + 1}`}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
+    <div class="relative group/gallery" aria-roledescription="carousel" aria-label="Galería de fotos">
+      <button
+        type="button"
+        id="gallery-prev"
+        class="gallery-nav-btn absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-neutral-700 shadow-lg border border-neutral-200 flex items-center justify-center hover:bg-white hover:text-neutral-900 transition-all opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 dark:bg-neutral-800/95 dark:text-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus-visible:ring-neutral-100"
+        aria-label="Foto anterior"
+      >
+        <Icon name="chevron-left" class="w-6 h-6" />
+      </button>
+
+      <div
+        id="gallery-track"
+        class="gallery-track flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+        tabindex="0"
+      >
+        {
+          images.map((image, index) => (
+            <figure
+              class="gallery-slide snap-center shrink-0 w-[88vw] sm:w-[75%] md:w-[65%] lg:w-[55%] aspect-[4/3] rounded-2xl overflow-hidden shadow-md"
+              data-index={index}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="w-full h-full object-cover"
+                loading={index < 2 ? 'eager' : 'lazy'}
+                draggable="false"
+              />
+            </figure>
+          ))
+        }
+      </div>
+
+      <button
+        type="button"
+        id="gallery-next"
+        class="gallery-nav-btn absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-neutral-700 shadow-lg border border-neutral-200 flex items-center justify-center hover:bg-white hover:text-neutral-900 transition-all opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 dark:bg-neutral-800/95 dark:text-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus-visible:ring-neutral-100"
+        aria-label="Foto siguiente"
+      >
+        <Icon name="chevron-right" class="w-6 h-6" />
+      </button>
+
+      <div
+        id="gallery-dots"
+        class="flex justify-center gap-2 mt-6"
+        role="tablist"
+        aria-label="Seleccionar foto"
+      >
+        {
+          images.map((_, index) => (
+            <button
+              type="button"
+              class="gallery-dot w-2.5 h-2.5 rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 focus-visible:ring-offset-2 dark:bg-neutral-600 dark:hover:bg-neutral-400 dark:focus-visible:ring-neutral-100 dark:focus-visible:ring-offset-neutral-900"
+              data-index={index}
+              role="tab"
+              aria-label={`Ir a la foto ${index + 1}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
             />
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  function initGalleryCarousel() {
+    const track = document.getElementById('gallery-track');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const dots = document.querySelectorAll<HTMLButtonElement>('.gallery-dot');
+    const slides = document.querySelectorAll<HTMLElement>('.gallery-slide');
+
+    if (!track || slides.length === 0) return;
+
+    let activeIndex = 0;
+
+    function getSlideScrollLeft(index: number): number {
+      const slide = slides[index];
+      if (!slide) return 0;
+      const trackRect = track!.getBoundingClientRect();
+      const slideRect = slide.getBoundingClientRect();
+      return track!.scrollLeft + (slideRect.left - trackRect.left);
+    }
+
+    function scrollToIndex(index: number): void {
+      const clamped = Math.max(0, Math.min(index, slides.length - 1));
+      activeIndex = clamped;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track!.scrollTo({
+        left: getSlideScrollLeft(clamped),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
+      updateDots();
+    }
+
+    function updateDots(): void {
+      dots.forEach((dot, i) => {
+        const isActive = i === activeIndex;
+        dot.setAttribute('aria-selected', String(isActive));
+        dot.classList.toggle('bg-neutral-800', isActive);
+        dot.classList.toggle('dark:bg-neutral-100', isActive);
+        dot.classList.toggle('w-6', isActive);
+        dot.classList.toggle('bg-neutral-300', !isActive);
+        dot.classList.toggle('dark:bg-neutral-600', !isActive);
+        dot.classList.toggle('w-2.5', !isActive);
+      });
+    }
+
+    function syncIndexFromScroll(): void {
+      const trackRect = track!.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      slides.forEach((slide, index) => {
+        const slideRect = slide.getBoundingClientRect();
+        const slideCenter = slideRect.left + slideRect.width / 2;
+        const distance = Math.abs(slideCenter - trackCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeIndex) {
+        activeIndex = closestIndex;
+        updateDots();
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => scrollToIndex(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => scrollToIndex(activeIndex + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.getAttribute('data-index'));
+        scrollToIndex(index);
+      });
+    });
+
+    track.addEventListener('scroll', () => {
+      window.requestAnimationFrame(syncIndexFromScroll);
+    }, { passive: true });
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToIndex(activeIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToIndex(activeIndex + 1);
+      }
+    });
+
+    updateDots();
+  }
+
+  initGalleryCarousel();
+  document.addEventListener('astro:page-load', initGalleryCarousel);
+</script>
+
+<style>
+  .gallery-track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>

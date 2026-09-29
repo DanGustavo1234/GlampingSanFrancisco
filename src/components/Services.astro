@@ -1,41 +1,45 @@
 ---
+import IconBox from './ui/IconBox.astro';
+
 const services = [
   {
-  title: "Café de Cortesía",
-  description: "Te ofrecemos café molido de origen local para que prepares, disfrutes y conectes con la esencia de la región.",
-  icon: "M17 8h1a3 3 0 010 6h-1M3 8h14v7a4 4 0 01-4 4H7a4 4 0 01-4-4V8z M7 3v2M11 3v2M15 3v2",
+    title: 'Café de Cortesía',
+    description:
+      'Te ofrecemos café molido de origen local para que prepares, disfrutes y conectes con la esencia de la región.',
+    icon: 'coffee' as const,
   },
   {
-    title: "Jacuzzi Privado",
-    description: "Confort, privacidad y una vista natural incomparable desde tu jacuzzi.",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+    title: 'Jacuzzi Privado',
+    description: 'Confort, privacidad y una vista natural incomparable desde tu jacuzzi.',
+    icon: 'zap' as const,
   },
   {
-    title: "Fogatas Nocturnas",
-    description: "Zona asignada para fogatas, incluye kit de malvaviscos y leña para cada noche.",
-    icon: "M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
-  }
+    title: 'Fogatas Nocturnas',
+    description: 'Zona asignada para fogatas, incluye kit de malvaviscos y leña para cada noche.',
+    icon: 'flame' as const,
+  },
 ];
 ---
-<section id="servicios" class="py-24 bg-neutral-50">
+
+<section id="servicios" class="py-16 sm:py-20 lg:py-24 bg-neutral-50 scroll-mt-20 dark:bg-neutral-950">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold text-neutral-900 mb-4">Servicios Exclusivos</h2>
-      <p class="text-neutral-700 max-w-2xl mx-auto text-lg">Creamos la atmósfera perfecta para tu desconexión con detalles pensados en ti.</p>
+    <div class="text-center mb-10 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4 dark:text-neutral-50">Servicios Exclusivos</h2>
+      <p class="text-neutral-700 max-w-2xl mx-auto text-base sm:text-lg dark:text-neutral-300">
+        Creamos la atmósfera perfecta para tu desconexión con detalles pensados en ti.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-      {services.map(service => (
-        <div class="bg-white p-8 rounded-3xl shadow-sm border border-neutral-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
-          <div class="w-14 h-14 bg-neutral-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-neutral-500 transition-colors duration-300">
-            <svg class="w-8 h-8 text-neutral-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={service.icon} />
-            </svg>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
+      {
+        services.map((service) => (
+          <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-neutral-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group dark:bg-neutral-900 dark:border-neutral-800">
+            <IconBox name={service.icon} size="md" hover class="mb-6" />
+            <h3 class="text-xl sm:text-2xl font-semibold text-neutral-900 mb-3 dark:text-neutral-50">{service.title}</h3>
+            <p class="text-neutral-700 leading-relaxed dark:text-neutral-300">{service.description}</p>
           </div>
-          <h3 class="text-2xl font-semibold text-neutral-900 mb-3">{service.title}</h3>
-          <p class="text-neutral-700 leading-relaxed">{service.description}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

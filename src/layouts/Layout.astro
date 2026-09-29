@@ -18,22 +18,33 @@ const { title } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script is:inline>
+			(function () {
+				try {
+					var stored = localStorage.getItem('theme');
+					var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					var dark = stored === 'dark' || (stored !== 'light' && prefersDark);
+					if (dark) document.documentElement.classList.add('dark');
+					document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+				} catch (e) {}
+			})();
+		</script>
 	</head>
-	<body class="bg-neutral-50 text-neutral-900 font-sans antialiased overflow-x-hidden">
+	<body class="bg-neutral-50 text-neutral-900 font-sans antialiased overflow-x-hidden dark:bg-neutral-950 dark:text-neutral-50">
 		<slot />
 	</body>
 </html>
 
 <style is:global>
-	/* Tailwind utilities should be imported in Astro if it uses standard Tailwind setup. 
-	   Astro's integration injects them automatically but we can define custom variables here. */
 	:root {
 		--color-neutral: #52525b;
 		--color-neutral-dark: #27272a;
 		--color-neutral-light: #f4f4f5;
 	}
-	
-	html {
-		scroll-behavior: smooth;
+
+	html.dark {
+		--color-neutral: #a1a1aa;
+		--color-neutral-dark: #fafafa;
+		--color-neutral-light: #18181b;
 	}
 </style>

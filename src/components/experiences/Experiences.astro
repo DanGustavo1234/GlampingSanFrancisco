@@ -1,0 +1,213 @@
+---
+import Icon from '../ui/Icon.astro';
+import { experiences } from '../../data/experiences';
+
+const slides = experiences
+  .filter((experience) => experience.available)
+  .map((experience) => ({
+    src: experience.image,
+    name: experience.name,
+    description: experience.description,
+  }));
+---
+
+<section id="experiencias" class="py-16 sm:py-20 lg:py-24 bg-neutral-100 scroll-mt-20 dark:bg-neutral-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 sm:mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4 dark:text-neutral-50">
+        Lo que puedes vivir aquí
+      </h2>
+      <p class="text-neutral-700 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed dark:text-neutral-300">
+        Una sorpresa romántica, un cumpleaños, una caja para compartir o un detalle a tu medida.
+      </p>
+    </div>
+
+    <div class="relative group/experiences" aria-roledescription="carousel" aria-label="Experiencias del glamping">
+      <button
+        type="button"
+        id="experiences-prev"
+        class="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-neutral-700 shadow-lg border border-neutral-200 flex items-center justify-center hover:bg-white hover:text-neutral-900 transition-all opacity-100 sm:opacity-0 sm:group-hover/experiences:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 dark:bg-neutral-800/95 dark:text-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus-visible:ring-neutral-100"
+        aria-label="Experiencia anterior"
+      >
+        <Icon name="chevron-left" class="w-6 h-6" />
+      </button>
+
+      <div
+        id="experiences-track"
+        class="experiences-track flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+        tabindex="0"
+      >
+        {
+          slides.map((slide, index) => (
+            <figure
+              class="experience-slide relative snap-center shrink-0 w-[88vw] sm:w-[75%] md:w-[65%] lg:w-[55%] aspect-[4/3] rounded-2xl overflow-hidden shadow-md"
+              data-index={index}
+            >
+              <img
+                src={slide.src}
+                alt={slide.name}
+                class="w-full h-full object-cover"
+                loading={index < 2 ? 'eager' : 'lazy'}
+                draggable="false"
+              />
+              <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/45 to-transparent px-5 pb-5 pt-16 sm:px-8 sm:pb-7">
+                <h3 class="text-white text-xl sm:text-2xl font-semibold">{slide.name}</h3>
+                <p class="text-white/90 text-sm sm:text-base mt-1 leading-snug line-clamp-2">{slide.description}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <button
+        type="button"
+        id="experiences-next"
+        class="absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-neutral-700 shadow-lg border border-neutral-200 flex items-center justify-center hover:bg-white hover:text-neutral-900 transition-all opacity-100 sm:opacity-0 sm:group-hover/experiences:opacity-100 focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 dark:bg-neutral-800/95 dark:text-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white dark:focus-visible:ring-neutral-100"
+        aria-label="Experiencia siguiente"
+      >
+        <Icon name="chevron-right" class="w-6 h-6" />
+      </button>
+
+      <div
+        id="experiences-dots"
+        class="flex justify-center gap-2 mt-6"
+        role="tablist"
+        aria-label="Seleccionar experiencia"
+      >
+        {
+          slides.map((slide, index) => (
+            <button
+              type="button"
+              class="experience-dot w-2.5 h-2.5 rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-800 focus-visible:ring-offset-2 dark:bg-neutral-600 dark:hover:bg-neutral-400 dark:focus-visible:ring-neutral-100 dark:focus-visible:ring-offset-neutral-900"
+              data-index={index}
+              role="tab"
+              aria-label={`Ir a ${slide.name}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initExperiencesCarousel() {
+    const track = document.getElementById('experiences-track');
+    const prevBtn = document.getElementById('experiences-prev');
+    const nextBtn = document.getElementById('experiences-next');
+    const dots = document.querySelectorAll<HTMLButtonElement>('.experience-dot');
+    const slides = document.querySelectorAll<HTMLElement>('.experience-slide');
+
+    if (!track || slides.length === 0 || track.dataset.ready === 'true') return;
+    track.dataset.ready = 'true';
+
+    let activeIndex = 0;
+
+    function getSlideScrollLeft(index: number): number {
+      const slide = slides[index];
+      if (!slide) return 0;
+      const trackRect = track!.getBoundingClientRect();
+      const slideRect = slide.getBoundingClientRect();
+      return track!.scrollLeft + (slideRect.left - trackRect.left);
+    }
+
+    function scrollToIndex(index: number): void {
+      const clamped = Math.max(0, Math.min(index, slides.length - 1));
+      activeIndex = clamped;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track!.scrollTo({
+        left: getSlideScrollLeft(clamped),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
+      updateDots();
+    }
+
+    function updateDots(): void {
+      dots.forEach((dot, i) => {
+        const isActive = i === activeIndex;
+        dot.setAttribute('aria-selected', String(isActive));
+        dot.classList.toggle('bg-neutral-800', isActive);
+        dot.classList.toggle('dark:bg-neutral-100', isActive);
+        dot.classList.toggle('w-6', isActive);
+        dot.classList.toggle('bg-neutral-300', !isActive);
+        dot.classList.toggle('dark:bg-neutral-600', !isActive);
+        dot.classList.toggle('w-2.5', !isActive);
+      });
+    }
+
+    function syncIndexFromScroll(): void {
+      const trackRect = track!.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      slides.forEach((slide, index) => {
+        const slideRect = slide.getBoundingClientRect();
+        const slideCenter = slideRect.left + slideRect.width / 2;
+        const distance = Math.abs(slideCenter - trackCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeIndex) {
+        activeIndex = closestIndex;
+        updateDots();
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => scrollToIndex(activeIndex - 1));
+    nextBtn?.addEventListener('click', () => scrollToIndex(activeIndex + 1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.getAttribute('data-index'));
+        scrollToIndex(index);
+      });
+    });
+
+    track.addEventListener(
+      'scroll',
+      () => {
+        window.requestAnimationFrame(syncIndexFromScroll);
+      },
+      { passive: true }
+    );
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToIndex(activeIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToIndex(activeIndex + 1);
+      }
+    });
+
+    updateDots();
+  }
+
+  initExperiencesCarousel();
+  document.addEventListener('astro:page-load', initExperiencesCarousel);
+</script>
+
+<style>
+  .experiences-track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .experiences-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

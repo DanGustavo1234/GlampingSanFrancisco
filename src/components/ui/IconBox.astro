@@ -1,0 +1,55 @@
+---
+import { ICONS, ICON_BOX_CLASSES, type IconName, type IconSize } from '../../data/icons';
+
+interface Props {
+  name: IconName;
+  size?: IconSize;
+  hover?: boolean;
+  inline?: boolean;
+  class?: string;
+  iconClass?: string;
+  dark?: boolean;
+}
+
+const {
+  name,
+  size = 'md',
+  hover = false,
+  inline = false,
+  class: className = '',
+  iconClass = '',
+  dark = false,
+} = Astro.props;
+
+const { box, icon } = ICON_BOX_CLASSES[size];
+const path = ICONS[name];
+
+const iconColor = dark
+  ? 'text-neutral-300'
+  : inline
+    ? 'text-current'
+    : 'text-neutral-600 dark:text-neutral-400';
+const hoverIcon = hover
+  ? ' group-hover:text-neutral-900 dark:group-hover:text-neutral-50 transition-colors duration-300'
+  : '';
+const displayClass = inline ? 'inline-flex align-middle' : 'flex';
+---
+
+<span
+  class:list={[
+    displayClass,
+    'items-center justify-center shrink-0 bg-transparent',
+    box,
+    className,
+  ]}
+>
+  <svg
+    class:list={[icon, iconColor, hoverIcon, iconClass]}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={path} />
+  </svg>
+</span>

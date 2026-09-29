@@ -1,40 +1,24 @@
 ---
-
+import IconBox from './ui/IconBox.astro';
+import Icon from './ui/Icon.astro';
 ---
 
-<section id="ubicacion" class="py-24 bg-neutral-50">
+<section id="ubicacion" class="py-16 sm:py-20 lg:py-24 bg-neutral-50 scroll-mt-20 dark:bg-neutral-950">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
       <div>
-        <h2 class="text-4xl font-bold text-neutral-900 mb-6">
+        <h2 class="text-3xl sm:text-4xl font-bold text-neutral-900 mb-6 dark:text-neutral-50">
           Dónde encontrarnos
         </h2>
 
         <ul class="space-y-4 mb-8">
-          <li class="flex items-start">
-            <svg
-              class="h-8 w-8 flex-shrink-0 text-neutral-600 mt-0.5 mr-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <span class="text-neutral-800 text-sm"
-              >Ubicado en la vía San Pedro – El Cisne, a solo 1 hora y 15
-              minutos de la ciudad de Loja, es el destino perfecto para escapar
-              del ruido, descansar y reconectar con lo esencial.</span
-            >
+          <li class="flex items-start gap-4">
+            <IconBox name="map-pin" size="sm" class="mt-0.5" />
+            <span class="text-neutral-800 text-base sm:text-lg leading-relaxed dark:text-neutral-200">
+              Ubicado en la vía San Pedro – El Cisne, a solo 1 hora y 15 minutos de la ciudad de
+              Loja, es el destino perfecto para escapar del ruido, descansar y reconectar con lo
+              esencial.
+            </span>
           </li>
         </ul>
 
@@ -42,36 +26,24 @@
           href="https://maps.app.goo.gl/bzsFGhPi8jbMmorS8"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-neutral-600 hover:bg-neutral-700 transition-all hover:scale-105 shadow-md"
+          class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-neutral-600 hover:bg-neutral-700 transition-all hover:scale-105 shadow-md min-h-[48px] dark:bg-neutral-200 dark:text-neutral-900 dark:hover:bg-white"
         >
           Abrir en Google Maps
-          <svg
-            class="ml-2 -mr-1 h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            ></path>
-          </svg>
+          <Icon name="external-link" class="ml-2 -mr-1 h-5 w-5" />
         </a>
       </div>
 
       <div
-        class="relative h-[450px] rounded-3xl overflow-hidden shadow-xl border border-neutral-200"
+        class="relative aspect-[4/3] sm:aspect-video min-h-[280px] sm:min-h-[360px] rounded-3xl overflow-hidden shadow-xl border border-neutral-200 dark:border-neutral-800"
       >
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3980.4875061611706!2d-79.41896799999999!3d-3.919273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zM8KwNTUnMDkuNCJTIDc5wrAyNScwOC4zIlc!5e0!3m2!1ses-419!2sec!4v1772314412612!5m2!1ses-419!2sec"
-          width="600"
-          height="450"
+          class="absolute inset-0 w-full h-full"
           style="border:0;"
           allowfullscreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de Glamping San Francisco en Google Maps"></iframe>
       </div>
     </div>
   </div>

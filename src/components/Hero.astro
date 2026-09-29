@@ -1,55 +1,116 @@
 ---
 
+import { SITE } from '../config/site';
+
 ---
 
+
+
 <section
+
   id="inicio"
-  class="relative min-h-screen flex items-center justify-center pt-20"
+
+  class="relative min-h-[85dvh] sm:min-h-screen flex items-center justify-center pt-20 scroll-mt-20"
+
 >
-  <!-- Background Image with Overlay -->
+
   <div class="absolute inset-0 z-0">
+
     <img
-      src="/img/glamping1.jpg"
+
+      src="/img/portada.png"
+
       alt="Glamping San Francisco - Vista principal"
-      class="w-full h-full object-cover object-center"
+
+      class="w-full h-full object-cover object-[center_30%] sm:object-center"
+
     />
-    <div class="absolute inset-0 bg-neutral-900/50 mix-blend-multiply"></div>
+
+    <div class="absolute inset-0 bg-neutral-900/50 mix-blend-multiply dark:bg-neutral-950/70"></div>
+
     <div
-      class="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-transparent"
+
+      class="absolute inset-0 bg-gradient-to-t from-neutral-900/40 via-transparent to-transparent"
+
     >
+
     </div>
+
   </div>
 
-  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16 sm:mt-0">
+
+
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-8 sm:mt-0">
+
     <span
+
       class="block text-neutral-200 uppercase tracking-[0.2em] font-medium mb-4 text-sm sm:text-base"
+
       >Naturaleza & Confort</span
+
     >
+
     <h1
-      class="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg leading-tight"
+
+      class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-lg leading-tight text-balance"
+
     >
-      Desconecta del mundo, <br />
+
+      Desconecta del mundo,
+
       <span class="text-neutral-100">conecta contigo.</span>
+
     </h1>
+
     <p
-      class="text-lg sm:text-xl text-neutral-50 mb-10 max-w-2xl mx-auto drop-shadow-md"
+
+      class="text-base sm:text-xl text-neutral-50 mb-10 max-w-2xl mx-auto drop-shadow-md"
+
     >
+
       Vive la experiencia de acampar bajo las estrellas con todas las
+
       comodidades de un resort de lujo en el corazón del bosque.
+
     </p>
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+
+    <div class="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-4">
+
       <a
-        href="#contacto"
-        class="bg-neutral-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-neutral-500 transition-all hover:scale-105 shadow-xl w-full sm:w-auto"
+
+        href={SITE.airbnbUrl}
+
+        target="_blank"
+
+        rel="noopener noreferrer"
+
+        data-airbnb-link
+
+        data-airbnb-source="hero"
+
+        class="bg-neutral-800 text-white px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-neutral-700 transition-all hover:scale-105 shadow-xl w-full sm:w-auto text-center min-h-[48px] flex items-center justify-center dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white"
+
       >
-        Reservar ahora
+
+        Reservar hospedaje en Airbnb
+
       </a>
+
       <a
-        href="#galeria"
-        class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all hover:scale-105 shadow-xl w-full sm:w-auto"
+
+        href="#experiencias"
+
+        class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white/30 transition-all hover:scale-105 shadow-xl w-full sm:w-auto text-center min-h-[48px] flex items-center justify-center"
+
       >
-        Descubrir más
+
+        Ver experiencias
+
       </a>
+
     </div>
+
   </div>
+
 </section>
+

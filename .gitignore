@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # public img
 public/img/
+# Local Netlify folder
+.netlify

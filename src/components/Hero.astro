@@ -1,6 +1,7 @@
 ---
 
 import { SITE } from '../config/site';
+import { publicUrl } from '../lib/public-url';
 
 ---
 
@@ -18,7 +19,7 @@ import { SITE } from '../config/site';
 
     <img
 
-      src="/img/portada.png"
+      src={publicUrl('img/portada.png')}
 
       alt="Glamping San Francisco - Vista principal"
 

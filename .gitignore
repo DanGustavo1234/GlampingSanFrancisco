@@ -23,7 +23,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# public img
-public/img/
 # Local Netlify folder
 .netlify

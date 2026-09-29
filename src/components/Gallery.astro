@@ -1,15 +1,17 @@
 ---
 import Icon from './ui/Icon.astro';
 
+import { publicUrl } from '../lib/public-url';
+
 const images = [
-  { src: '/img/g3.png', alt: 'Vista exterior del glamping entre la naturaleza' },
-  { src: '/img/g5.png', alt: 'Interior acogedor del alojamiento' },
-  { src: '/img/g6.png', alt: 'Espacio de descanso con vista natural' },
-  { src: '/img/portada.png', alt: 'Panorámica del Glamping San Francisco' },
-  { src: '/img/g8.png', alt: 'Detalle del entorno y paisaje' },
-  { src: '/img/g9.png', alt: 'Rincón del glamping al atardecer' },
-  { src: '/img/g10.png', alt: 'Área de convivencia al aire libre' },
-  { src: '/img/g11.png', alt: 'Experiencia de confort en la naturaleza' },
+  { src: publicUrl('img/g3.png'), alt: 'Vista exterior del glamping entre la naturaleza' },
+  { src: publicUrl('img/g5.png'), alt: 'Interior acogedor del alojamiento' },
+  { src: publicUrl('img/g6.png'), alt: 'Espacio de descanso con vista natural' },
+  { src: publicUrl('img/portada.png'), alt: 'Panorámica del Glamping San Francisco' },
+  { src: publicUrl('img/g8.png'), alt: 'Detalle del entorno y paisaje' },
+  { src: publicUrl('img/g9.png'), alt: 'Rincón del glamping al atardecer' },
+  { src: publicUrl('img/g10.png'), alt: 'Área de convivencia al aire libre' },
+  { src: publicUrl('img/g11.png'), alt: 'Experiencia de confort en la naturaleza' },
 ];
 ---
 

@@ -1,4 +1,5 @@
 import type { Experience } from '../types/experience';
+import { publicUrl } from '../lib/public-url';
 
 export const experiences: Experience[] = [
   {
@@ -13,7 +14,7 @@ export const experiences: Experience[] = [
     longDescription:
       'Preparamos el ambiente antes de su llegada. Si quieres ir más allá, suma fresas, flores u otro detalle.',
     price: 35,
-    image: '/img/experiences/experiencia-romantica.jpg',
+    image: publicUrl('img/experiences/experiencia-romantica.jpg'),
     includedItems: [
       'Pétalos decorativos',
       'Globos',
@@ -56,7 +57,7 @@ export const experiences: Experience[] = [
     longDescription:
       'Dejamos la sorpresa lista antes de que lleguen. Tú solo disfrutas el momento.',
     price: 30,
-    image: '/img/experiences/cumpleanos.jpg',
+    image: publicUrl('img/experiences/cumpleanos.jpg'),
     includedItems: [
       'Globos',
       'Dulces',
@@ -95,7 +96,7 @@ export const experiences: Experience[] = [
     longDescription:
       'Una sola caja cubre la bienvenida en familia, la noche de película y el momento para desconectarse.',
     price: 30,
-    image: '/img/experiences/cajita-familiar.jpg',
+    image: publicUrl('img/experiences/cajita-familiar.jpg'),
     includedItems: [
       'Popcorn',
       'Chocolates',
@@ -134,7 +135,7 @@ export const experiences: Experience[] = [
       'Si no encaja en las otras tres, la coordinamos por WhatsApp y la dejamos lista.',
     price: 45,
     priceLabel: 'Desde $45',
-    image: '/img/experiences/experiencia-personalizada.jpg',
+    image: publicUrl('img/experiences/experiencia-personalizada.jpg'),
     includedItems: [
       'Consulta personalizada',
       'Diseño a medida',
